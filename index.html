@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Haven - Mental Wellness Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff9a76;
+            --light: #f5f7fa;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --bg-color: #ffffff;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+        }
+
+    [data-theme="dark"] {
+        --primary: #6b8cbc;
+        --secondary: #4a6fa5;
+        --accent: #ff9a76;
+        --light: #34495e;
+        --dark: #ecf0f1;
+        --bg-color: #2c3e50;
+        --text-color: #ecf0f1;
+        --card-bg: #34495e;
+    }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            min-height: calc(100vh - 20px);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile First Design */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 450px;
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 500px;
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logo-icon {
+            font-size: clamp(20px, 5vw, 24px);
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: clamp(18px, 5vw, 22px);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: clamp(12px, 3vw, 14px);
+            color: var(--secondary);
+            margin-top: 5px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 5px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            padding: 10px 5px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: clamp(12px, 3vw, 14px);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: clamp(15px, 4vw, 20px);
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card h2 {
+            font-size: clamp(16px, 4vw, 18px);
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 i {
+            color: var(--accent);
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(10px, 3vw, 15px);
+        }
+
+        .activity {
+            background: var(--light);
+            border-radius: 10px;
+            padding: clamp(12px, 3vw, 15px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .activity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .activity-icon {
+            font-size: clamp(20px, 5vw, 24px);
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .activity-title {
+            font-weight: 600;
+            font-size: clamp(12px, 3vw, 14px);
+            margin-bottom: 5px;
+        }
+
+        .activity-desc {
+            font-size: clamp(10px, 2.5vw, 12px);
+            color: var(--secondary);
+        }
+
+        /* Breathing Exercise Styles */
+        .breathe-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .breathe-circle {
+            width: clamp(120px, 30vw, 180px);
+            height: clamp(120px, 30vw, 180px);
+            border-radius: 50%;
+            background: var(--primary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 600;
+            transition: all 4s ease-in-out;
+            box-shadow: 0 0 20px rgba(74, 111, 165, 0.3);
+        }
+
+        .breathe-circle.expand {
+            transform: scale(1.5);
+            background: var(--accent);
+            box-shadow: 0 0 30px rgba(255, 154, 118, 0.4);
+        }
+
+        .breathe-instruction {
+            font-size: clamp(14px, 3.5vw, 16px);
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .breathe-timer {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .breathe-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Stretching Exercise Styles */
+        .stretch-container {
+            text-align: center;
+        }
+
+        .stretch-exercise {
+            display: none;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .stretch-exercise.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .stretch-title {
+            font-size: clamp(16px, 4vw, 18px);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stretch-description {
+            font-size: clamp(13px, 3vw, 14px);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .stretch-timer {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .stretch-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stretch-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .exercise-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .exercise-tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            text-align: center;
+            background: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: clamp(13px, 3vw, 14px);
+        }
+
+        .exercise-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .exercise-content {
+            display: none;
+        }
+
+        .exercise-content.active {
+            display: block;
+        }
+
+        /* Gratitude Section Styles */
+        .gratitude-container {
+            text-align: center;
+        }
+
+        .gratitude-prompt {
+            font-size: clamp(14px, 3.5vw, 16px);
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            font-weight: 600;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gratitude-counter {
+            font-size: clamp(12px, 2.5vw, 14px);
+            margin: 10px 0;
+            color: var(--secondary);
+        }
+
+        .gratitude-journal {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .journal-entry {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--success);
+        }
+
+        .journal-date {
+            font-size: 12px;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .journal-content {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: inline-block;
+            font-size: clamp(13px, 3vw, 14px);
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e4e9f2;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 15px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--light);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            text-align: center;
+            color: var(--secondary);
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        /* Feedback Form Styles */
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            font-size: clamp(13px, 3vw, 14px);
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: clamp(13px, 3vw, 14px);
+            transition: all 0.3s ease;
+            width: 100%;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+        }
+
+        /* Helpline Styles */
+        .helpline-list {
+            list-style: none;
+        }
+
+        .helpline-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .helpline-item:last-child {
+            border-bottom: none;
+        }
+
+        .helpline-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .helpline-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .helpline-name {
+            font-weight: 600;
+            font-size: clamp(13px, 3vw, 14px);
+            margin-bottom: 3px;
+            color: var(--dark);
+            word-break: break-word;
+        }
+
+        .helpline-number {
+            font-size: clamp(13px, 3vw, 14px);
+            color: var(--primary);
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .helpline-hours {
+            font-size: clamp(11px, 2.5vw, 12px);
+            color: var(--secondary);
+        }
+
+        /* Footer and Developer Info */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: clamp(11px, 2.5vw, 12px);
+            color: var(--secondary);
+        }
+
+        .developer-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .developer-info a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: clamp(11px, 2.5vw, 12px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .developer-info a:hover {
+            color: var(--accent);
+        }
+
+        .quote-display {
+            font-style: italic;
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            font-size: clamp(13px, 3vw, 14px);
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: clamp(12px, 2.5vw, 13px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 350px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .breathe-controls,
+            .stretch-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .container {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+    <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+    <div class="logo">
+        <i class="fas fa-heart logo-icon"></i>
+        <h1>Mindful Haven</h1>
+    </div>
+    <p class="tagline">Your safe space for mental wellness breaks</p>
+</header>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="activities">Activities</div>
+            <div class="tab" data-tab="breathe">Breathe & Stretch</div>
+            <div class="tab" data-tab="gratitude">Gratitude</div>
+            <div class="tab" data-tab="helplines">Helplines</div>
+            <div class="tab" data-tab="feedback">Feedback</div>
+        </div>
+
+        <div class="tab-content active" id="activities">
+            <div class="card">
+                <h2><i class="fas fa-brain"></i> Quick Mental Breaks</h2>
+                <div class="activity-grid">
+                    <div class="activity" id="breathe-activity">
+                        <i class="fas fa-wind activity-icon"></i>
+                        <div class="activity-title">Breathe</div>
+                        <div class="activity-desc">2-min guided breathing</div>
+                    </div>
+                    <div class="activity" id="stretch-activity">
+                        <i class="fas fa-hands activity-icon"></i>
+                        <div class="activity-title">Stretch</div>
+                        <div class="activity-desc">Quick desk stretches</div>
+                    </div>
+                    <div class="activity" id="quote-activity">
+                        <i class="fas fa-quote-right activity-icon"></i>
+                        <div class="activity-title">Inspiration</div>
+                        <div class="activity-desc">Uplifting quotes</div>
+                    </div>
+                    <div class="activity" id="gratitude-activity">
+                        <i class="fas fa-heart activity-icon"></i>
+                        <div class="activity-title">Gratitude</div>
+                        <div class="activity-desc">Positive reflection</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-quote-left"></i> Today's Inspiration</h2>
+                <div class="quote-display">
+                    "You are braver than you believe, stronger than you seem, and smarter than you think."
+                    <div class="quote-author">- A.A. Milne</div>
+                </div>
+                <button class="btn btn-secondary" id="new-quote">New Quote</button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="breathe">
+            <div class="exercise-tabs">
+                <div class="exercise-tab active" data-exercise="breathing">Breathing</div>
+                <div class="exercise-tab" data-exercise="stretching">Stretching</div>
+            </div>
+
+            <!-- Breathing Exercise -->
+            <div class="exercise-content active" id="breathing-exercise">
+                <div class="card">
+                    <h2><i class="fas fa-wind"></i> Breathing Exercise</h2>
+                    <div class="breathe-container">
+                        <div class="breathe-instruction" id="breathe-instruction">
+                            Click Start to begin your breathing exercise
+                        </div>
+                        <div class="breathe-circle" id="breathe-circle">
+                            Ready
+                        </div>
+                        <div class="breathe-timer" id="breathe-timer">02:00</div>
+                        <div class="breathe-controls">
+                            <button class="btn btn-primary" id="start-breathe">Start Exercise</button>
+                            <button class="btn btn-secondary" id="pause-breathe" style="display: none;">Pause</button>
+                            <button class="btn btn-secondary" id="reset-breathe" style="display: none;">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stretching Exercise -->
+            <div class="exercise-content" id="stretching-exercise">
+                <div class="card">
+                    <h2><i class="fas fa-hands"></i> Desk Stretches</h2>
+                    <div class="stretch-container">
+                        <div class="stretch-exercise active" id="stretch-1">
+                            <div class="stretch-title">Neck Rolls</div>
+                            <div class="stretch-description">
+                                Slowly tilt your head to the right, bringing your ear toward your shoulder. 
+                                Hold for 15 seconds, then slowly roll your chin to your chest and over to the left side.
+                                Repeat 3 times on each side.
+                            </div>
+                            <div class="stretch-timer" id="stretch-timer-1">15</div>
+                            <div class="stretch-controls">
+                                <button class="btn btn-primary start-stretch" data-stretch="1">Start</button>
+                                <button class="btn btn-secondary pause-stretch" data-stretch="1" style="display: none;">Pause</button>
+                            </div>
+                        </div>
+
+                        <div class="stretch-exercise" id="stretch-2">
+                            <div class="stretch-title">Shoulder Rolls</div>
+                            <div class="stretch-description">
+                                Sit up straight and slowly roll your shoulders up toward your ears, 
+                                then back and down in a circular motion. Repeat 5 times forward and 5 times backward.
+                                Keep your movements slow and controlled.
+                            </div>
+                            <div class="stretch-timer" id="stretch-timer-2">30</div>
+                            <div class="stretch-controls">
+                                <button class="btn btn-primary start-stretch" data-stretch="2">Start</button>
+                                <button class="btn btn-secondary pause-stretch" data-stretch="2" style="display: none;">Pause</button>
+                            </div>
+                        </div>
+
+                        <div class="stretch-exercise" id="stretch-3">
+                            <div class="stretch-title">Wrist Stretch</div>
+                            <div class="stretch-description">
+                                Extend your right arm with palm facing down. Gently pull your fingers back toward your body with your left hand. 
+                                Hold for 15 seconds, then switch arms. Repeat 2 times for each arm.
+                            </div>
+                            <div class="stretch-timer" id="stretch-timer-3">15</div>
+                            <div class="stretch-controls">
+                                <button class="btn btn-primary start-stretch" data-stretch="3">Start</button>
+                                <button class="btn btn-secondary pause-stretch" data-stretch="3" style="display: none;">Pause</button>
+                            </div>
+                        </div>
+
+                        <div class="stretch-exercise" id="stretch-4">
+                            <div class="stretch-title">Seated Spinal Twist</div>
+                            <div class="stretch-description">
+                                Sit up straight and place your right hand on your left knee. Gently twist your torso to the left, 
+                                using your chair for support. Hold for 20 seconds, then switch sides. Repeat 2 times for each side.
+                            </div>
+                            <div class="stretch-timer" id="stretch-timer-4">20</div>
+                            <div class="stretch-controls">
+                                <button class="btn btn-primary start-stretch" data-stretch="4">Start</button>
+                                <button class="btn btn-secondary pause-stretch" data-stretch="4" style="display: none;">Pause</button>
+                            </div>
+                        </div>
+
+                        <div class="stretch-progress">
+                            <div class="progress-dot active" data-stretch="1"></div>
+                            <div class="progress-dot" data-stretch="2"></div>
+                            <div class="progress-dot" data-stretch="3"></div>
+                            <div class="progress-dot" data-stretch="4"></div>
+                        </div>
+
+                        <div class="stretch-controls" style="margin-top: 20px;">
+                            <button class="btn btn-secondary" id="prev-stretch" style="display: none;">Previous</button>
+                            <button class="btn btn-primary" id="next-stretch">Next Stretch</button>
+                            <button class="btn btn-primary" id="complete-stretch" style="display: none;">Complete Routine</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="gratitude">
+            <div class="card">
+                <h2><i class="fas fa-heart"></i> Daily Gratitude Practice</h2>
+                <div class="gratitude-container">
+                    <div class="gratitude-prompt" id="gratitude-prompt">
+                        What's one small thing that made you smile today?
+                    </div>
+                    <div class="gratitude-counter" id="gratitude-counter">
+                        Daily Progress: 0/5 prompts completed
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text" id="progress-text">Start your gratitude journey today!</div>
+                    </div>
+                    <button class="btn btn-primary" id="next-gratitude">Next Gratitude Prompt</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-book"></i> Gratitude Journal (Optional)</h2>
+                <p style="margin-bottom: 15px; font-size: 14px; color: var(--secondary);">
+                    Write down what you're grateful for today. Your entries are saved privately in your browser.
+                </p>
+                <textarea id="gratitude-journal-entry" placeholder="What are you grateful for today?"></textarea>
+                <button class="btn btn-primary" id="save-journal">Save Journal Entry</button>
+            </div>
+
+            <div class="card" id="journal-entries-container" style="display: none;">
+                <h2><i class="fas fa-history"></i> Your Gratitude Journal</h2>
+                <div id="journal-entries"></div>
+            </div>
+
+            <div class="card" id="achievements-container" style="display: none;">
+                <h2><i class="fas fa-trophy"></i> Your Progress</h2>
+                <div id="achievements"></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="helplines">
+            <div class="card">
+                <h2><i class="fas fa-phone-alt"></i> South African Helplines</h2>
+                <ul class="helpline-list">
+                    <li class="helpline-item">
+                        <div class="helpline-icon">
+                            <i class="fas fa-life-ring"></i>
+                        </div>
+                        <div class="helpline-info">
+                            <div class="helpline-name">Suicide Crisis Helpline</div>
+                            <div class="helpline-number">0800 567 567</div>
+                            <div class="helpline-hours">24/7</div>
+                            <a href="tel:0800567567" class="btn btn-primary" style="padding: 8px 15px; font-size: 12px;">Call Now</a>
+                        </div>
+                    </li>
+                    <li class="helpline-item">
+                        <div class="helpline-icon">
+                            <i class="fas fa-head-side-virus"></i>
+                        </div>
+                        <div class="helpline-info">
+                            <div class="helpline-name">CIPLA Mental Health Helpline</div>
+                            <div class="helpline-number">0800 456 789</div>
+                            <div class="helpline-hours">24/7</div>
+                            <a href="tel:0800456789" class="btn btn-primary" style="padding: 8px 15px; font-size: 12px;">Call Now</a>
+                        </div>
+                    </li>
+                    <li class="helpline-item">
+                        <div class="helpline-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="helpline-info">
+                            <div class="helpline-name">Substance Abuse Helpline</div>
+                            <div class="helpline-number">0800 121 314</div>
+                            <div class="helpline-hours">24/7</div>
+                            <a href="tel:0800121314" class="btn btn-primary" style="padding: 8px 15px; font-size: 12px;">Call Now</a>
+                        </div>
+                    </li>
+                    <li class="helpline-item">
+                        <div class="helpline-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="helpline-info">
+                            <div class="helpline-name">Cipla Chat Line (WhatsApp)</div>
+                            <div class="helpline-number">076 882 2775</div>
+                            <div class="helpline-hours">8AM - 5PM</div>
+                            <a href="https://wa.me/27768822775" class="btn btn-primary" style="padding: 8px 15px; font-size: 12px;" target="_blank">Chat Now</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="feedback">
+            <div class="card">
+                <h2><i class="fas fa-comment-dots"></i> Share Your Feedback</h2>
+                <form class="feedback-form" id="feedback-form">
+                    <div class="form-group">
+                        <label for="name">Name (Optional)</label>
+                        <input type="text" id="name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email (Optional)</label>
+                        <input type="email" id="email" placeholder="Your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-type">Feedback Type</label>
+                        <select id="feedback-type">
+                            <option value="suggestion">Suggestion</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="compliment">Compliment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" placeholder="Please share your thoughts, suggestions, or report any issues..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-code"></i> Developer Contact</h2>
+                <p style="margin-bottom: 15px; font-size: clamp(13px, 3vw, 14px);">Interested in collaboration or hiring?</p>
+                <div class="developer-info">
+                    <a href="tel:0614015974"><i class="fas fa-phone"></i> 061 401 5974</a>
+                    <a href="mailto:dabulasakhokuhle02@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://github.com/Double-D12" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+                <p style="margin-top: 15px; text-align: center; font-size: clamp(11px, 2.5vw, 12px); color: var(--secondary);">
+                    Created by Sakhokuhle Dabula
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Mindful Haven - Your mental wellness companion</p>
+            <p>Remember: It's okay not to be okay. Reach out for help when you need it.</p>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">Thank you for your feedback!</div>
+
+   <script>
+    // ===== DARK/LIGHT MODE CODE =====
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    });
+
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+        
+        // Initialize all other functionality after theme is set
+        initializeApp();
+    });
+
+    function initializeApp() {
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Exercise tabs functionality
+        document.querySelectorAll('.exercise-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.exercise-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.exercise-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.exercise}-exercise`).classList.add('active');
+            });
+        });
+
+        // Activity buttons
+        document.getElementById('breathe-activity').addEventListener('click', () => {
+            switchToTab('breathe');
+            document.querySelector('[data-exercise="breathing"]').click();
+        });
+
+        document.getElementById('stretch-activity').addEventListener('click', () => {
+            switchToTab('breathe');
+            document.querySelector('[data-exercise="stretching"]').click();
+        });
+
+        document.getElementById('gratitude-activity').addEventListener('click', () => {
+            switchToTab('gratitude');
+        });
+
+        document.getElementById('quote-activity').addEventListener('click', () => {
+            displayRandomQuote();
+            showNotification('Here is some inspiration for you!');
+        });
+
+        function switchToTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Breathing Exercise
+        const breatheCircle = document.getElementById('breathe-circle');
+        const breatheTimer = document.getElementById('breathe-timer');
+        const breatheInstruction = document.getElementById('breathe-instruction');
+        const startBreatheBtn = document.getElementById('start-breathe');
+        const pauseBreatheBtn = document.getElementById('pause-breathe');
+        const resetBreatheBtn = document.getElementById('reset-breathe');
+        
+        let breatheInterval;
+        let breatheSeconds = 120;
+        let isBreathing = false;
+        let isInhale = true;
+        
+        startBreatheBtn.addEventListener('click', startBreathing);
+        pauseBreatheBtn.addEventListener('click', pauseBreathing);
+        resetBreatheBtn.addEventListener('click', resetBreathing);
+        
+        function startBreathing() {
+            isBreathing = true;
+            startBreatheBtn.style.display = 'none';
+            pauseBreatheBtn.style.display = 'inline-block';
+            resetBreatheBtn.style.display = 'inline-block';
+            
+            breatheInstruction.textContent = "Breathe in as the circle expands, breathe out as it contracts";
+            
+            breatheInterval = setInterval(() => {
+                if (breatheSeconds <= 0) {
+                    completeBreathing();
+                    return;
+                }
+                
+                breatheSeconds--;
+                updateBreatheTimer();
+                
+                // Toggle between inhale and exhale every 4 seconds
+                if (breatheSeconds % 4 === 0) {
+                    isInhale = !isInhale;
+                    breatheCircle.textContent = isInhale ? 'Breathe In' : 'Breathe Out';
+                    breatheCircle.classList.toggle('expand', isInhale);
+                }
+            }, 1000);
+        }
+        
+        function pauseBreathing() {
+            isBreathing = false;
+            clearInterval(breatheInterval);
+            pauseBreatheBtn.textContent = 'Resume';
+            pauseBreatheBtn.onclick = resumeBreathing;
+            breatheInstruction.textContent = "Paused. Click Resume to continue";
+        }
+        
+        function resumeBreathing() {
+            isBreathing = true;
+            pauseBreatheBtn.textContent = 'Pause';
+            pauseBreatheBtn.onclick = pauseBreathing;
+            breatheInstruction.textContent = "Breathe in as the circle expands, breathe out as it contracts";
+            
+            breatheInterval = setInterval(() => {
+                if (breatheSeconds <= 0) {
+                    completeBreathing();
+                    return;
+                }
+                
+                breatheSeconds--;
+                updateBreatheTimer();
+                
+                if (breatheSeconds % 4 === 0) {
+                    isInhale = !isInhale;
+                    breatheCircle.textContent = isInhale ? 'Breathe In' : 'Breathe Out';
+                    breatheCircle.classList.toggle('expand', isInhale);
+                }
+            }, 1000);
+        }
+        
+        function resetBreathing() {
+            clearInterval(breatheInterval);
+            isBreathing = false;
+            breatheSeconds = 120;
+            isInhale = true;
+            
+            startBreatheBtn.style.display = 'inline-block';
+            pauseBreatheBtn.style.display = 'none';
+            resetBreatheBtn.style.display = 'none';
+            pauseBreatheBtn.textContent = 'Pause';
+            pauseBreatheBtn.onclick = pauseBreathing;
+            
+            breatheCircle.textContent = 'Ready';
+            breatheCircle.classList.remove('expand');
+            breatheInstruction.textContent = "Click Start to begin your breathing exercise";
+            updateBreatheTimer();
+        }
+        
+        function completeBreathing() {
+            clearInterval(breatheInterval);
+            showNotification('Breathing exercise completed! Great job! 🎉');
+            resetBreathing();
+        }
+        
+        function updateBreatheTimer() {
+            const minutes = Math.floor(breatheSeconds / 60);
+            const seconds = breatheSeconds % 60;
+            breatheTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Stretching Exercises
+        const stretchTimers = {
+            1: 15,
+            2: 30,
+            3: 15,
+            4: 20
+        };
+
+        let currentStretch = 1;
+        let stretchIntervals = {};
+        let stretchStates = {};
+
+        document.querySelectorAll('.start-stretch').forEach(button => {
+            button.addEventListener('click', function() {
+                const stretchId = this.dataset.stretch;
+                startStretch(stretchId);
+            });
+        });
+
+        document.querySelectorAll('.pause-stretch').forEach(button => {
+            button.addEventListener('click', function() {
+                const stretchId = this.dataset.stretch;
+                pauseStretch(stretchId);
+            });
+        });
+
+        document.getElementById('next-stretch').addEventListener('click', nextStretch);
+        document.getElementById('prev-stretch').addEventListener('click', prevStretch);
+        document.getElementById('complete-stretch').addEventListener('click', completeStretchRoutine);
+
+        function startStretch(stretchId) {
+            const startBtn = document.querySelector(`.start-stretch[data-stretch="${stretchId}"]`);
+            const pauseBtn = document.querySelector(`.pause-stretch[data-stretch="${stretchId}"]`);
+            const timerElement = document.getElementById(`stretch-timer-${stretchId}`);
+            
+            startBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+            
+            let seconds = stretchTimers[stretchId];
+            timerElement.textContent = seconds;
+            stretchStates[stretchId] = { running: true, seconds: seconds };
+            
+            stretchIntervals[stretchId] = setInterval(() => {
+                seconds--;
+                timerElement.textContent = seconds;
+                stretchStates[stretchId].seconds = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(stretchIntervals[stretchId]);
+                    stretchStates[stretchId].running = false;
+                    showNotification(`Stretch ${stretchId} completed!`);
+                    pauseBtn.style.display = 'none';
+                    startBtn.style.display = 'inline-block';
+                    startBtn.textContent = 'Restart';
+                }
+            }, 1000);
+        }
+
+        function pauseStretch(stretchId) {
+            const startBtn = document.querySelector(`.start-stretch[data-stretch="${stretchId}"]`);
+            const pauseBtn = document.querySelector(`.pause-stretch[data-stretch="${stretchId}"]`);
+            
+            if (stretchStates[stretchId]?.running) {
+                clearInterval(stretchIntervals[stretchId]);
+                stretchStates[stretchId].running = false;
+                pauseBtn.textContent = 'Resume';
+            } else {
+                startStretch(stretchId);
+                pauseBtn.textContent = 'Pause';
+            }
+        }
+
+        function nextStretch() {
+            if (currentStretch < 4) {
+                document.getElementById(`stretch-${currentStretch}`).classList.remove('active');
+                currentStretch++;
+                document.getElementById(`stretch-${currentStretch}`).classList.add('active');
+                updateProgressDots();
+                updateNavigationButtons();
+            }
+        }
+
+        function prevStretch() {
+            if (currentStretch > 1) {
+                document.getElementById(`stretch-${currentStretch}`).classList.remove('active');
+                currentStretch--;
+                document.getElementById(`stretch-${currentStretch}`).classList.add('active');
+                updateProgressDots();
+                updateNavigationButtons();
+            }
+        }
+
+        function completeStretchRoutine() {
+            showNotification('Stretch routine completed! Great job taking care of your body! 💪');
+            resetStretchRoutine();
+        }
+
+        function resetStretchRoutine() {
+            currentStretch = 1;
+            document.querySelectorAll('.stretch-exercise').forEach(exercise => {
+                exercise.classList.remove('active');
+            });
+            document.getElementById('stretch-1').classList.add('active');
+            updateProgressDots();
+            updateNavigationButtons();
+            
+            // Reset all timers
+            for (let i = 1; i <= 4; i++) {
+                clearInterval(stretchIntervals[i]);
+                document.getElementById(`stretch-timer-${i}`).textContent = stretchTimers[i];
+                document.querySelector(`.start-stretch[data-stretch="${i}"]`).style.display = 'inline-block';
+                document.querySelector(`.start-stretch[data-stretch="${i}"]`).textContent = 'Start';
+                document.querySelector(`.pause-stretch[data-stretch="${i}"]`).style.display = 'none';
+                document.querySelector(`.pause-stretch[data-stretch="${i}"]`).textContent = 'Pause';
+            }
+        }
+
+        function updateProgressDots() {
+            document.querySelectorAll('.progress-dot').forEach(dot => {
+                dot.classList.remove('active');
+                if (parseInt(dot.dataset.stretch) === currentStretch) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prev-stretch');
+            const nextBtn = document.getElementById('next-stretch');
+            const completeBtn = document.getElementById('complete-stretch');
+            
+            prevBtn.style.display = currentStretch > 1 ? 'inline-block' : 'none';
+            
+            if (currentStretch < 4) {
+                nextBtn.style.display = 'inline-block';
+                completeBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'none';
+                completeBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Initialize navigation buttons
+        updateNavigationButtons();
+
+        // Gratitude System
+        const gratitudePrompts = [
+            "What's one small thing that made you smile today?",
+            "Who are you grateful for in your life right now?",
+            "What is a challenge you've overcome recently?",
+            "What is something beautiful you noticed today?",
+            "What skill or ability are you thankful to have?",
+            "What made you feel peaceful or calm recently?",
+            "What opportunity are you grateful for?",
+            "What is a simple pleasure you enjoyed today?",
+            "Who has shown you kindness recently?",
+            "What lesson are you grateful to have learned?",
+            "What about your body are you thankful for?",
+            "What memory makes you feel happy?",
+            "What modern convenience are you grateful for?",
+            "What book, song, or art has inspired you?",
+            "What nature experience are you thankful for?"
+        ];
+
+        let currentGratitudeIndex = 0;
+        let dailyGratitudeCount = 0;
+        const maxDailyGratitude = 5;
+
+        // Load saved gratitude data
+        const savedGratitudeData = localStorage.getItem('gratitudeData');
+        let gratitudeData = savedGratitudeData ? JSON.parse(savedGratitudeData) : {
+            dailyCount: 0,
+            lastDate: new Date().toDateString(),
+            journalEntries: [],
+            streak: 0,
+            totalEntries: 0
+        };
+
+        // Check if it's a new day
+        const today = new Date().toDateString();
+        if (gratitudeData.lastDate !== today) {
+            gratitudeData.dailyCount = 0;
+            gratitudeData.lastDate = today;
+            saveGratitudeData();
+        }
+
+        const gratitudePrompt = document.getElementById('gratitude-prompt');
+        const gratitudeCounter = document.getElementById('gratitude-counter');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const nextGratitudeBtn = document.getElementById('next-gratitude');
+        const saveJournalBtn = document.getElementById('save-journal');
+        const journalEntry = document.getElementById('gratitude-journal-entry');
+        const journalEntriesContainer = document.getElementById('journal-entries-container');
+        const journalEntries = document.getElementById('journal-entries');
+        const achievementsContainer = document.getElementById('achievements-container');
+        const achievements = document.getElementById('achievements');
+
+        // Initialize gratitude display
+        updateGratitudeDisplay();
+
+        nextGratitudeBtn.addEventListener('click', () => {
+            if (dailyGratitudeCount < maxDailyGratitude) {
+                dailyGratitudeCount++;
+                gratitudeData.dailyCount = dailyGratitudeCount;
+                gratitudeData.totalEntries++;
+                
+                // Check for streak
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                if (gratitudeData.lastStreakDate === yesterday.toDateString()) {
+                    gratitudeData.streak++;
+                } else if (gratitudeData.lastStreakDate !== today) {
+                    gratitudeData.streak = 1;
+                }
+                gratitudeData.lastStreakDate = today;
+                
+                saveGratitudeData();
+                updateGratitudeDisplay();
+                
+                if (dailyGratitudeCount === maxDailyGratitude) {
+                    showNotification("Amazing! You've completed your daily gratitude practice! 🎉");
+                    checkAchievements();
+                }
+            }
+        });
+
+        saveJournalBtn.addEventListener('click', () => {
+            const entryText = journalEntry.value.trim();
+            if (entryText) {
+                const newEntry = {
+                    date: new Date().toLocaleDateString(),
+                    content: entryText,
+                    timestamp: new Date().toISOString()
+                };
+                
+                gratitudeData.journalEntries.unshift(newEntry);
+                saveGratitudeData();
+                journalEntry.value = '';
+                showNotification("Journal entry saved! 📝");
+                loadJournalEntries();
+                checkAchievements();
+            } else {
+                showNotification("Please write something before saving.");
+            }
+        });
+
+        function updateGratitudeDisplay() {
+            dailyGratitudeCount = gratitudeData.dailyCount;
+            
+            // Get a random prompt based on the day to ensure consistency
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+            currentGratitudeIndex = (dayOfYear * maxDailyGratitude + dailyGratitudeCount) % gratitudePrompts.length;
+            
+            gratitudePrompt.textContent = gratitudePrompts[currentGratitudeIndex];
+            gratitudeCounter.textContent = `Daily Progress: ${dailyGratitudeCount}/${maxDailyGratitude} prompts completed`;
+            
+            const progressPercent = (dailyGratitudeCount / maxDailyGratitude) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+            
+            if (dailyGratitudeCount === 0) {
+                progressText.textContent = "Start your gratitude journey today!";
+            } else if (dailyGratitudeCount < maxDailyGratitude) {
+                progressText.textContent = `Great job! ${maxDailyGratitude - dailyGratitudeCount} more to complete your daily practice.`;
+            } else {
+                progressText.textContent = "Congratulations! You've completed your daily gratitude practice!";
+                nextGratitudeBtn.disabled = true;
+                nextGratitudeBtn.textContent = "Completed for Today";
+            }
+            
+            // Load journal entries if any exist
+            if (gratitudeData.journalEntries.length > 0) {
+                loadJournalEntries();
+            }
+            
+            // Check achievements
+            checkAchievements();
+        }
+
+        function loadJournalEntries() {
+            if (gratitudeData.journalEntries.length > 0) {
+                journalEntriesContainer.style.display = 'block';
+                journalEntries.innerHTML = '';
+                
+                // Show only last 5 entries
+                const recentEntries = gratitudeData.journalEntries.slice(0, 5);
+                
+                recentEntries.forEach(entry => {
+                    const entryElement = document.createElement('div');
+                    entryElement.className = 'journal-entry';
+                    entryElement.innerHTML = `
+                        <div class="journal-date">${entry.date}</div>
+                        <div class="journal-content">${entry.content}</div>
+                    `;
+                    journalEntries.appendChild(entryElement);
+                });
+            }
+        }
+
+        function checkAchievements() {
+            const achievementsList = [];
+            
+            // Weekly achievement
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const recentEntries = gratitudeData.journalEntries.filter(entry => 
+                new Date(entry.timestamp) > weekAgo
+            );
+            
+            if (recentEntries.length >= 5) {
+                achievementsList.push({
+                    title: "Weekly Reflection",
+                    message: "You've journaled 5 times this week! Consistency is key to building positive habits. 🌟"
+                });
+            }
+            
+            // Monthly achievement
+            const monthAgo = new Date();
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+            const monthlyEntries = gratitudeData.journalEntries.filter(entry => 
+                new Date(entry.timestamp) > monthAgo
+            );
+            
+            if (monthlyEntries.length >= 15) {
+                achievementsList.push({
+                    title: "Monthly Milestone",
+                    message: "15 journal entries this month! You're building a powerful gratitude practice. 💫"
+                });
+            }
+            
+            // Streak achievement
+            if (gratitudeData.streak >= 7) {
+                achievementsList.push({
+                    title: "7-Day Streak",
+                    message: "One week of gratitude practice! You're creating lasting positive change. 🔥"
+                });
+            }
+            
+            if (gratitudeData.streak >= 30) {
+                achievementsList.push({
+                    title: "30-Day Champion",
+                    message: "A full month of gratitude! You've built a powerful daily habit. 🏆"
+                });
+            }
+            
+            // Total entries achievement
+            if (gratitudeData.totalEntries >= 50) {
+                achievementsList.push({
+                    title: "Gratitude Master",
+                    message: "50 gratitude entries! You're mastering the art of appreciation. 🌈"
+                });
+            }
+            
+            // Display achievements
+            if (achievementsList.length > 0) {
+                achievementsContainer.style.display = 'block';
+                achievements.innerHTML = '';
+                
+                achievementsList.forEach(achievement => {
+                    const achievementElement = document.createElement('div');
+                    achievementElement.className = 'journal-entry';
+                    achievementElement.innerHTML = `
+                        <div class="achievement-badge">${achievement.title}</div>
+                        <div class="journal-content">${achievement.message}</div>
+                    `;
+                    achievements.appendChild(achievementElement);
+                });
+            }
+        }
+
+        function saveGratitudeData() {
+            localStorage.setItem('gratitudeData', JSON.stringify(gratitudeData));
+        }
+
+        // Quotes functionality
+        const quotes = [
+            { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" },
+            { text: "It's okay to not be okay. Just don't give up. Allow yourself time to heal.", author: "Unknown" },
+            { text: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", author: "Unknown" },
+            { text: "The only way out is through.", author: "Robert Frost" },
+            { text: "You don't have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },
+            { text: "Small steps every day lead to big results over time.", author: "Unknown" },
+            { text: "Be gentle with yourself. You're doing the best you can.", author: "Unknown" },
+            { text: "Healing is not linear. It's okay to have bad days.", author: "Unknown" }
+        ];
+        
+        const quoteDisplay = document.querySelector('.quote-display');
+        const newQuoteBtn = document.getElementById('new-quote');
+        
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            quoteDisplay.innerHTML = `"${quote.text}"<div class="quote-author">- ${quote.author}</div>`;
+        }
+        
+        newQuoteBtn.addEventListener('click', displayRandomQuote);
+        
+        // Display initial quote
+        displayRandomQuote();
+
+        // Feedback form
+        const feedbackForm = document.getElementById('feedback-form');
+        const notification = document.getElementById('notification');
+        
+        feedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showNotification('Thank you for your feedback! We appreciate your input.');
+            feedbackForm.reset();
+        });
+        
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show welcome notification
+        showNotification('Welcome to Mindful Haven! Take a deep breath. 😊');
+    }
+</script>
+</body>
+
+</html>
